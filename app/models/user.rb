@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 	attr_accessor :login
 
   has_many :active_conversations, class_name:  "Conversation",
-                                  foreign_key: "sender_id",
+                                  foreign_key: "receiver_id",
                                   dependent:   :destroy
   has_many :passive_conversations, class_name:  "Conversation",
                                    foreign_key: "sender_id",

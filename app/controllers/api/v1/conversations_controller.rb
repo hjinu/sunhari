@@ -5,11 +5,21 @@ class Api::V1::ConversationsController < ApplicationController
 	respond_to :json
 
 	def index
+		@senders = current_user.senders
+		@ids = []
+		@senders.count.times do |i|
+			@ids << "id#{i}"
+		end
+
+		puts "idiidididididi"
+		puts @ids
+
+		respond_with @senders
 	end
 
 	private
 
-	def sms_confirmation_params
-		params.require(:sms_confirmation).permit(:phone)
+	def conversation_params
+		params.require(:conversation).permit(:phone)
 	end
 end

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       end
 
       post 'sms_confirmations' => 'sms_confirmations#create'
+
+      get 'conversations' => 'conversations#index'
     end
   end
 
