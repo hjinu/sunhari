@@ -15,12 +15,6 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:type, :phone, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:type, :login, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| 
-      u.permit(
-        :phone, :password, :password_confirmation, :current_password,
-        devices_attributes: [:token, :platform]
-      ) 
-    }
   end
  
   private

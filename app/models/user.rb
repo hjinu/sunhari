@@ -1,7 +1,18 @@
 class User < ActiveRecord::Base
+	attr_accessor :login
+
+  has_many :active_conversations, class_name:  "Conversation",
+                                  foreign_key: "sender_id",
+                                  dependent:   :destroy
+  has_many :passive_conversations, class_name:  "Conversation",
+                                   foreign_key: "sender_id",
+                                   dependent:   :destroy
+  has_many :senders, through: :active_conversations,  source: :sender
+  has_many :receivers, through: :passive_conversations, source: :receiver
+
 	before_save :ensure_authentication_token
 
-  devise :database_authenticatable, :registerable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :trackable
 
   def ensure_authentication_token
     if authentication_token.blank?

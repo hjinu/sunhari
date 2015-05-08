@@ -1,7 +1,22 @@
 Rails.application.routes.draw do
+  resources :posts
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  namespace :api do
+    namespace :v1 do
+      devise_scope :user do
+        post 'registrations' => 'registrations#create'
+        
+        post 'sessions' => 'sessions#create', :as => 'login'
+        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+      end
+
+      post 'sms_confirmations' => 'sms_confirmations#create'
+    end
+  end
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
