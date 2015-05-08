@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: sunhari_production
-  username: sunhari
-  password: <%= ENV['SUNHARI_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: <%= ENV['PSQL_PASSWORD'] %>
